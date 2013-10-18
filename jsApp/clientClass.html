@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+	<html>
+
+	<head>
+		<link rel= "stylesheet" type="text/css" href="client.css">
+		<script src="http://static.opentok.com/webrtc/v2.0/js/TB.min.js" ></script> 
+		<script type="text/javascript" charset="utf-8"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+		<!--<script src="client.js" ></script> -->
+	</head>
+
+<script>
+var sname = 'div';
+function getParam (sname)
+{
+  var params = location.search.substr(location.search.indexOf("?")+1);
+  var sval = "";
+  params = params.split("&");
+    // split param and value into individual pieces
+    for (var i=0; i<params.length; i++)
+       {
+         temp = params[i].split("=");
+         if ( [temp[0]] == sname ) { sval = temp[1]; }
+       }
+  return sval;
+}
+</script>
+
+	<div id="wrapper" class="clearfix">
+
+	<div id="header">
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></P>
+	</div>
+
+	<div id="column-left">
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></P>
+	</div>
+<script>
+	OPENTOK_API_KEY = '38953222';
+OPENTOK_API_SECRET = '50b4adf245fd0457fd49b51b6a3b381ff97e4364'; 
+CLIENT_TOKEN = TB.generateToken({
+            'connection_data': "userid_" + new Date().getTime(),
+            'role': "publisher"
+          });
+
+var DIV_ID = getParam(sname);
+
+
+function sessionConnectedHandler(event){
+	session.publish ( publisher );
+	subscribeToStreams (event.streams);
+}
+
+function subscribeToStreams(streams){
+	for (var i = 0; i < streams.length; i++){
+		var stream = streams[i];
+		if(stream.connection.connectionId 
+			!= session.connection.connectionId) {
+			session.subscribe(stream);
+		}
+	}
+}
+
+function streamCreatedHandler(event){
+	subscribeToStreams(event.streams);
+}
+
+
+var publisher = TB.initPublisher(OPENTOK_API_KEY, DIV_ID,
+                                 {width:200, height:100});
+var session = TB.initSession (SESSION_ID);
+
+session.connect(OPENTOK_API_KEY, CLIENT_TOKEN);
+
+session.addEventListener("session created", sessionConnectedHandler);
+session.addEventListener("stream created", streamCreatedHandler);
+
+</script>
+	<div id="column-center">
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></P>
+	</div>
+
+	<div id="column-right">
+		<p></p>
+		<p></p>
+		<p></p>
+	</div>
+
+
+	<div id="footer"></div>
+	</div>
+
+
+
+	</html>
