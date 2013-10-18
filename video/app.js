@@ -57,7 +57,7 @@ renderExampleHTML = function(apikey, sessionId, token){
   return [
     '<html>\n',
       '<head>\n',
-        '<title>OpenTok Hello World</title>\n',
+        '<title>Vidnex Fitness Class</title>\n',
         '<script src="http://static.opentok.com/v0.91/js/TB.min.js"></script>\n',
         '<script>\n',
           'var apikey = "',apikey,'"\n',
@@ -79,6 +79,6 @@ console.log("Connecting to TokBox to establish session");
 // a unique token for each page request
 
 ot.createSession('localhost',{},function(sessionId){
-  server.listen(8000);
+  server.listen(process.env.PORT || 5000);
   console.log("Session Created, server running on port 8000");
 })

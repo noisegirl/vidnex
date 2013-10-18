@@ -1,7 +1,11 @@
 window.onload = function(){
   var session = TB.initSession(sessionId); // Sample session ID. 
+  
+ // var publisher = TB.initSession(apiKey,"Trainer",{width:300, height:400} )
+  //session.publish(publisher);
 
-	session.addEventListener("sessionConnected", sessionConnectedHandler);
+	
+  session.addEventListener("sessionConnected", sessionConnectedHandler);
 	session.addEventListener("streamCreated", streamCreatedHandler);
 	session.connect(apikey, token); // OpenTok sample API key and sample token string. 
 
