@@ -1,0 +1,25 @@
+/* For modern browsers */
+.clearfix:before,
+.clearfix:after {
+    content:"";
+    display:table;
+}
+.clearfix:after {
+    clear:both;
+}
+
+body { margin: 0; padding: 0; }   
+
+#wrapper { width: 980px; margin: 0 auto; display:block;}  
+
+#header { background: black; color: white; }  
+
+#column-left { width: 250px; height: 40px; float: left; background-color: red; }   
+
+#column-center { width: 480px; float: left; background-color: yellow; }   
+
+#column-right { width: 250px; float: left; background-color: purple; } 
+
+#footer { clear: both; background-color: green; } 
+
+
